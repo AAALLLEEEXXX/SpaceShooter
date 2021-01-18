@@ -19,7 +19,11 @@ public class FpsInput : MonoBehaviour
     {
         var deltaX = Input.GetAxis("Horizontal") * _speed;
         var deltaZ = Input.GetAxis("Vertical") * _speed;
-
+        var motion = new Vector3(deltaX, 0, deltaZ);
+        motion = Vector3.ClampMagnitude(motion, _speed);
+        motion.y = _gravity;
+        motion *= Time.deltaTime;
+        motion = transform.TransformDirection(motion);
+        _controller.Move(motion);
     }
-
 }
