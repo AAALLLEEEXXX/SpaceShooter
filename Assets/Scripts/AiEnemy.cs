@@ -8,7 +8,7 @@ public class AiEnemy : MonoBehaviour
     private float _speed = 1.0f;
 
     [SerializeField]
-    private float _damage = 1f;
+    private int _damage = 1;
 
     [SerializeField]
     private float _minDistance = 1.0f;
@@ -18,10 +18,12 @@ public class AiEnemy : MonoBehaviour
 
     private float _distance;
     private Transform _target;
+    private PlayerCharacter _playerCharacter;
 
     private void Start()
     {
         _target = FindObjectOfType<PlayerCharacter>().transform;
+        _playerCharacter = _target.gameObject.GetComponent<PlayerCharacter>();
     }
 
     private void Update()
@@ -36,5 +38,8 @@ public class AiEnemy : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(_target.position - transform.position), _speed * Time.deltaTime);
             transform.position = Vector3.Lerp(transform.position, _target.position, _speed * Time.deltaTime);
         }
+
+        if (_distance <= _minDistance)
+            _playerCharacter.Hurt(_damage);
     }
 }

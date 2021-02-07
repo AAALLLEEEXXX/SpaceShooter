@@ -45,6 +45,11 @@ public class Shoot : MonoBehaviour
 
                 if (destroyObject != null)
                     destroyObject.Damage(_damage);
+
+                var dieEnemy = hit.transform.GetComponent<DieEnemy>();
+
+                if (dieEnemy != null)
+                    dieEnemy.ReactToHit();
             }
         }
     }
