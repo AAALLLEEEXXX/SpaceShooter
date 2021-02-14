@@ -13,7 +13,7 @@ public class PlayerCharacter : MonoBehaviour
         _health = _health - damage;
 
         if (_health <= 0)
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
 
         Debug.Log("Health: " + _health);
     }
